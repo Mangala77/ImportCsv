@@ -1,0 +1,11 @@
+company,location,region,service,price,duration,disabled
+Google,Berlin,EU,Design with HTML/CSS,120,30,false
+Google,San Francisco,US,Design with HTML/CSS,120,30,false
+Google,San Francisco,US,Restful API design,1500,120,false
+Apple,London,EU,Design with HTML/CSS,120,30,false
+Google,Berlin,EU,Design with HTML/CSS,120,30,false
+Apple,Berlin,EU,Restful API design,1500,120,false
+IBM,San Francisco,US,Design with HTML/CSS,120,30,true
+Google,San Francisco,US,Design with HTML/CSS,120,30,false
+IBM,Berlin,EU,Restful API design,1500,120,true
+IBM,London,EU,Restful API design,1500,120,true

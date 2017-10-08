@@ -1,0 +1,126 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1347\cocoasubrtf570
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+{\field{\*\fldinst{HYPERLINK "https://www.youtube.com/watch?v=Sv8442cL_q4"}}{\fldrslt 
+\f0\fs24 \cf0 https://www.youtube.com/watch?v=Sv8442cL_q4}}
+\f0\fs24 \
+\
+\
+{\field{\*\fldinst{HYPERLINK "https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-two"}}{\fldrslt https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-two}}\
+\
+\
+\
+\
+require 'rails_helper'\
+\
+describe Api::V1::ServicesController  do\
+  # initialize test data \
+  let!(:company) \{ create(:company) \}\
+  let!(:services) \{ create_list(:service, 5, company_id: company.id) \}\
+  let(:service_id) \{ services.first.id \}\
+\
+  # Test suite for GET /todos\
+  describe 'GET services' do\
+    # make HTTP get request before each example\
+    before \{ get "v1/services" \}\
+\
+    it 'returns services' do\
+      # Note `json` is a custom helper to parse JSON responses\
+      expect(json).not_to be_empty\
+      expect(json.size).to eq(5)\
+    end\
+\
+    it 'returns status code 200' do\
+      expect(response).to have_http_status(200)\
+    end\
+  end\
+\
+  # Test suite for GET /todos/:id\
+  describe 'GET /services/:id' do\
+    before \{ get "v1/services/#\{service_id\}" \}\
+\
+    context 'when the record exists' do\
+      it 'returns the services' do\
+        expect(json).not_to be_empty\
+        expect(json['id']).to eq(service_id)\
+      end\
+\
+      it 'returns status code 200' do\
+        expect(response).to have_http_status(200)\
+      end\
+    end\
+\
+    context 'when the record does not exist' do\
+      let(:service_id) \{ 100 \}\
+\
+      it 'returns status code 404' do\
+        expect(response).to have_http_status(404)\
+      end\
+\
+      it 'returns a not found message' do\
+        expect(response.body).to match(/Couldn't find service/)\
+      end\
+    end\
+  end\
+\
+  # Test suite for POST /todos\
+  describe 'POST /services' do\
+    # valid payload\
+    let(:valid_attributes) \{ \{ name: 'Design with HTML/CSS', price:120, duration:30, disabled: false \} \}\
+\
+    context 'when the request is valid' do\
+      before \{ post 'v1/services', params: valid_attributes \}\
+\
+      it 'creates a todo' do\
+        expect(json['name']).to eq('Design with HTML/CSS')\
+        expect(json['price']).to eq(120)\
+      end\
+\
+      it 'returns status code 201' do\
+        expect(response).to have_http_status(201)\
+      end\
+    end\
+\
+    context 'when the request is invalid' do\
+      before \{ post 'v1/services', params: \{ duration: 120 \} \}\
+\
+      it 'returns status code 422' do\
+        expect(response).to have_http_status(422)\
+      end\
+\
+      it 'returns a validation failure message' do\
+        expect(response.body)\
+          .to match(/Validation failed: name can't be blank/)\
+      end\
+    end\
+  end\
+\
+  # Test suite for PUT /todos/:id\
+  describe 'PUT /services/:id' do\
+    let(:valid_attributes) \{ \{ name: 'Restful API design' \} \}\
+\
+    context 'when the record exists' do\
+      before \{ put "v1/services/#\{service_id\}", params: valid_attributes \}\
+\
+      it 'updates the record' do\
+        expect(response.body).to be_empty\
+      end\
+\
+      it 'returns status code 204' do\
+        expect(response).to have_http_status(204)\
+      end\
+    end\
+  end\
+\
+  # Test suite for DELETE /todos/:id\
+  describe 'DELETE /services/:id' do\
+    before \{ delete "v1/services/#\{service_id\}" \}\
+\
+    it 'returns status code 204' do\
+      expect(response).to have_http_status(204)\
+    end\
+  end\
+end\
+}
