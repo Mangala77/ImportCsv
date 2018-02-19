@@ -38,7 +38,7 @@ module Api::V1
     # PATCH/PUT /services/1.json
     def update
       @service.update!(service_params)
-      head :no_content
+      json_response(@service, :updated)
       #end
     end
 

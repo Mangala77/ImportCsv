@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :service do
     name { Faker::Lorem.word }
-    price { Faker::Number.number(10) }
-    duration { Faker::Number.number(10) }
-    company_id 1
+    price { Faker::Number.number(5) }
+    duration { Faker::Number.number(5) }
+    company_id {Faker::Number.number(5)}
   end
 end

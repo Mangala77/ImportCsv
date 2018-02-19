@@ -6,7 +6,7 @@ describe Api::V1::ServicesController do
   let!(:services) { create_list(:service, 5, company_id: company.id) }
   let(:service_id) { services.first.id }
   before do
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials("secret")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials("secret123")
   end
 
   # Test suite for GET /todos
@@ -94,11 +94,7 @@ describe Api::V1::ServicesController do
       before { put :update, params: { id: service_id.to_i, service: {name: 'Restful API design'} } }
 
       it 'updates the record' do
-        expect(response.body).to be_empty
-      end
-
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
+        expect(json["name"]).to eq('Restful API design')
       end
       
     end

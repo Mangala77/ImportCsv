@@ -4,7 +4,7 @@ describe Api::V1::CompaniesController do
   # initialize test data
   let!(:companies) { create_list(:company, 5) }
   before do
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials("secret")
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials("secret123")
   end
 
   # Test suite for GET /todos
