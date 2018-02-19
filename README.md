@@ -49,20 +49,6 @@ Run the application
 rails s
 
 
-#### todo list
-## heroku deploymet is done with foll
-#Addons:         heroku-postgresql:hobby-dev
-#Auto Cert Mgmt: false
-#Dynos:          web: 1
-#Git URL:        https://git.heroku.com/polar-brook-56194.git
-#Region:         us
-#Repo Size:      0 B
-#Slug Size:      39 MB
-#Stack:          heroku-16
-#Web URL:        https://polar-brook-56194.herokuapp.com/
-
-## herouku url doesnt work due to authorisation so need to test with herouko api test which needs to be fixed
-
 
 ### without authentication
 to test in browser
@@ -92,11 +78,7 @@ url: http://localhost:3000/v1/companies
 method: ‘GET’
 
 
-
-To perform every API call we also need a REST-client application. Chrome has a popular extension named “POSTMAN”. Install and open it to execute API calls.
-
-or you can test with CURL with api-token
-
+To Test API
 for eg:
 
 Get all service:
@@ -119,8 +101,6 @@ Delete Service:
 
 curl -H "Authorization: Token token=secret123" -X "DELETE" http://localhost:3000/v1/services/47
 
-
-### for api-token authorisation which also can be implememted with auth token using Device gem or jwt gem and bycrypt, so was not sure about what exactly expected, so used comparable token in application controller authentication method.
 
 
 
